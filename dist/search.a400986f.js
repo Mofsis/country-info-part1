@@ -140,12 +140,12 @@
       this[globalName] = mainExports;
     }
   }
-})({"1Mq12":[function(require,module,exports) {
+})({"1fSmN":[function(require,module,exports) {
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "4a236f9275d0a351";
-module.bundle.HMR_BUNDLE_ID = "b5b6c481d56a3cb1";
+module.bundle.HMR_BUNDLE_ID = "bdf09d02a400986f";
 "use strict";
 function _createForOfIteratorHelper(o, allowArrayLike) {
     var it;
@@ -458,38 +458,41 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"5HwUs":[function(require,module,exports) {
+},{}],"hebny":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-async function getCountries() {
+let inputCountry = (e)=>{
+    e.preventDefault();
+    const input = document.getElementById("search-input");
+    console.log(inputCountry);
+    searchCountries(input.value);
+};
+const listener = document.getElementById("button");
+listener.addEventListener("click", inputCountry);
+let selectedCountry = "";
+async function searchCountries(country) {
     try {
-        const result = await _axiosDefault.default.get("https://restcountries.com/v2/all");
+        const countryInput = `https://restcountries.com/v2/name/${country}`;
+        selectedCountry = country;
+        const result = await _axiosDefault.default.get(countryInput);
         console.log(result);
-        const data = result.data;
-        const listOfCountries = document.getElementById("list");
-        const countries = data.sort((a, b)=>a.population - b.population
-        ).map((country)=>{
-            return `<li class="region-${country.region}"><img class="flag" src="${country.flag}" alt="flag">${country.name}
-                <p class="pop">Has a population of ${country.population} people</p>
-            </li> `;
-        });
-        listOfCountries.innerHTML = `${countries.join('')}`;
+        let valuta = `${result.data[0].currencies[0].name}'s`;
+        if (result.data[0].currencies.length === 2) valuta = `${result.data[0].currencies[0].name}'s and ${result.data[0].currencies[1].name}'s`;
+        const searchCountryInfo = document.getElementById("search-function");
+        document.getElementById("search-function").style.opacity = "1";
+        document.getElementById("input-warning").style.opacity = "0";
+        searchCountryInfo.innerHTML = `
+        <h3><img class="flagtwo" src="${result.data[0].flag}" alt="flag">${result.data[0].name}</h3> 
+        <p>${result.data[0].name} is situated in ${result.data[0].subregion}. It has a population of ${result.data[0].population} people</p>
+        <p>The capital is ${result.data[0].capital} and you can pay with ${valuta}</p>
+        <p>They speak ${result.data[0].languages[0].name}</p>`;
     } catch (e) {
-        console.error(e);
+        document.getElementById("input-warning").style.opacity = "1";
+        document.getElementById("input-warning").innerHTML = "Country name is invalid";
+        document.getElementById("search-function").style.opacity = "0";
     }
 }
-getCountries();
-let nav = document.getElementById("navbar");
-window.onscroll = function() {
-    if (window.pageYOffset > 10) {
-        nav.style.opacity = ".7";
-        nav.style.padding = "1px";
-    } else {
-        nav.style.opacity = "1";
-        nav.style.padding = "5px";
-    }
-};
 
 },{"axios":"1IeuP","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"1IeuP":[function(require,module,exports) {
 module.exports = require('./lib/axios');
@@ -2079,6 +2082,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["1Mq12","5HwUs"], "5HwUs", "parcelRequirecb08")
+},{}]},["1fSmN","hebny"], "hebny", "parcelRequirecb08")
 
-//# sourceMappingURL=index.d56a3cb1.js.map
+//# sourceMappingURL=search.a400986f.js.map
