@@ -1,0 +1,1 @@
+{"mappings":"AAAA,OAAO,CAAC,GAAG,CAAC,CAAO,QAEnB,CAA+C,AAA/C,EAA+C,AAA/C,6CAA+C","sources":["src/search.js"],"sourcesContent":["console.log(\"hallo\");\r\n\r\n//https://restcountries.com/v2/name/netherlands\r\n\r\n"],"names":[],"version":3,"file":"search.92907839.js.map","sourceRoot":"/__parcel_source_root/"}
